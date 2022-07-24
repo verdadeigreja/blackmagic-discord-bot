@@ -4,7 +4,7 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const { joinVoiceChannel, createAudioResource, createAudioPlayer } = require('@discordjs/voice');
 const { generateDependencyReport } = require('@discordjs/voice');
 
-const token = "MTAwMDgzNzI2ODEyODQwMzQ2Ng.GrNU5g.fEWyLMZAWjpZYvoFTKjHObEr9OgToP03Fx-XHE";
+const token = "MTAwMDgzNzI2ODEyODQwMzQ2Ng.GuLglD.z12-Wv7ublXKPlkvOE4I6luYYJCQ9XaRDqVSzs";
 const atemIp = '192.168.0.111';
 
 console.log(generateDependencyReport());
@@ -38,15 +38,11 @@ client.on("ready", () => {
   
 myAtem.on('stateChanged', (state, pathToChange) => {
 
-    console.log(pathToChange);
     if (pathToChange.includes('video.mixEffects.0.programInput'))
     {
         const cam = state.video.mixEffects[0].programInput;
-        if (cam == 1)
-            player.play(createAudioResource('camera1.mp3'));
-        if (cam == 2)
-            player.play(createAudioResource('camera2.mp3'));
-        console.log("Camera in air", cam);
+        player.play(createAudioResource(`camera${cam}.mp3`));
+        console.log("Camera in air: ", cam);
     }
 })
 
